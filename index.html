@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de QR Codes para Códigos</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Gerador de QR Codes para Códigos</h1>
+      <p class="description">
+        Cole os dados ou faça upload de um CSV para gerar QR Codes
+      </p>
+    </header>
+
+    <section class="controls">
+      <div class="input-section">
+        <textarea
+          id="input"
+          placeholder="Cole os dados no formato: código;nome;quantidade (uma linha por item)"
+        ></textarea>
+      </div>
+
+      <div class="file-upload">
+        <label for="csv">Selecionar arquivo CSV</label>
+        <input type="file" id="csv" accept=".csv" />
+        <span id="file-name" class="file-name">Nenhum arquivo selecionado</span>
+      </div>
+
+      <div class="options">
+        <div class="option-group">
+          <label for="qrSize">Tamanho do QR Code</label>
+          <input type="number" id="qrSize" value="96" min="64" max="256" />
+        </div>
+
+        <div class="option-group">
+          <label for="qrEcc">Correção de Erro</label>
+          <select id="qrEcc">
+            <option value="M">M (15%)</option>
+            <option value="Q">Q (25%)</option>
+            <option value="H">H (30%)</option>
+          </select>
+        </div>
+
+        <div class="option-group">
+          <label for="dedup">
+            <input type="checkbox" id="dedup" checked />
+            Deduplicar por código
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="generate">Gerar QR Codes</button>
+        <button id="print">Imprimir</button>
+        <button id="clear">Limpar</button>
+      </div>
+
+      <div id="status" class="status"></div>
+    </section>
+    <!-- Seletor de visualização -->
+    <div class="view-toggle">
+      <button data-view="cards" class="active">Visualização em Cards</button>
+      <button data-view="table">Visualização em Tabela</button>
+    </div>
+
+    <!-- Container para os QR Codes em formato de grid -->
+    <div id="qr-grid-container" class="qr-grid-container">
+      <div class="qr-grid"></div>
+    </div>
+
+    <div id="table-container" class="table-container">
+      <table id="grid">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>QR Code</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="empty-state" class="empty-state">
+      <p>
+        Nenhum dado para exibir. Cole os dados ou faça upload de um arquivo CSV.
+      </p>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Desenvolvido por</h3>
+          <p>Maciel Ribeiro</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contato</h3>
+          <div class="contact-links">
+            <a
+              href="https://wa.me/5562982809010"
+              target="_blank"
+              class="contact-link"
+            >
+              <i class="fab fa-whatsapp"></i>
+              <span>(62) 98280-9010</span>
+            </a>
+
+            <a href="mailto:stwcontato@hotmail.com" class="contact-link">
+              <i class="fas fa-envelope"></i>
+              <span>stwcontato@hotmail.com</span>
+            </a>
+
+            <a
+              href="https://github.com/Maciel76"
+              target="_blank"
+              class="contact-link"
+            >
+              <i class="fab fa-github"></i>
+              <span>Maciel76</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2023 Gerador de QR Codes. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
